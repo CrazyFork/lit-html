@@ -31,7 +31,9 @@ export class TemplateResult {
   processor: TemplateProcessor;
 
   constructor(
-      strings: TemplateStringsArray, values: any[], type: string,
+      strings: TemplateStringsArray,  // html`a ${a} b ${c}`, ['a ', ' b ']
+      values: any[],  // [${a}, ${c}]
+      type: string, // html
       processor: TemplateProcessor) {
     this.strings = strings;
     this.values = values;

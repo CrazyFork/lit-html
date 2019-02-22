@@ -46,7 +46,7 @@ export class Template {
 
   constructor(result: TemplateResult, element: HTMLTemplateElement) {
     this.element = element;
-    let index = -1;
+    let index = -1;           // 这个index和partIndex是啥区别?
     let partIndex = 0;
     const nodesToRemove: Node[] = [];
     const _prepareTemplate = (template: HTMLTemplateElement) => {
@@ -97,7 +97,7 @@ export class Template {
               const strings = attributeValue.split(markerRegex);
               this.parts.push({type: 'attribute', index, name, strings});
               (node as Element).removeAttribute(attributeLookupName);
-              partIndex += strings.length - 1;
+              partIndex += strings.length - 1; // :todo
             }
           }
           if ((node as Element).tagName === 'TEMPLATE') {

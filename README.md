@@ -1,3 +1,58 @@
+
+## 
+```raw
+src
+├── directives
+│   ├── async-append.ts
+│   ├── async-replace.ts
+│   ├── cache.ts
+│   ├── class-map.ts
+│   ├── guard.ts
+│   ├── if-defined.ts
+│   ├── repeat.ts
+│   ├── style-map.ts
+│   ├── unsafe-html.ts
+│   └── until.ts
+├── env.d.ts
+├── lib
+│   ├── default-template-processor.ts  // 默认的template processor
+│   ├── directive.ts            // 
+│   ├── dom.ts
+│   ├── modify-template.ts      // 
+│   ├── part.ts                 // 定义了part的基础interface行为
+│   ├── parts.ts                // 定义了各种基类的 parts
+│   ├── render-options.ts       // 定义了如何render的options.
+│   ├── render.ts               // 
+│   ├── shady-render.ts         //
+│   ├── template-factory.ts     // 用于创建template的, 底层会用缓存去cache创建出来的Template.
+│   ├── template-instance.ts    // 用于插入在dom节点之后的live update, 工作机制还是需要再详细理解下.
+│   ├── template-processor.ts   // 没有特别懂是怎么回事
+│   ├── template-result.ts      // TemplateResult, 没怎么看懂, 就是创建了一个template节点, 然后在对应的节点插入了nodeMarker节点.
+│   └── template.ts             // Template, 会根据 html tag string 处理掉的 TemplateResult 返回 Template. 会在对应的节点生成part分割.
+├── lit-html.ts
+├── polyfills
+│   └── template_polyfill.ts
+```
+
+## 解释
+
+* `part`: 每个可以commit的最小分类. 属性, 节点Node, property 等等
+  * `nodePart `: 会在startNode到endNode之间做操作, 删减node节点
+* `html`: tag template 会将字符串转换成`TemplateResult`返回.
+* `TemplateFactory`: `export type TemplateFactory = (result: TemplateResult) => Template;`
+* `TemplateInstance`: 用于负责更新 template 和 values 的主要 class. 需要详细阅读下. 
+
+
+
+# Links
+* [How To Traverse the DOM](https://www.digitalocean.com/community/tutorials/how-to-traverse-the-dom)
+* [DOM tree](https://javascript.info/dom-nodes)
+
+
+
+
+
+
 > ## 🛠 Status: In Development
 > lit-html is currently in development. It's on the fast track to a 1.0 release, so we encourage you to use it and give us your feedback, but there are things that haven't been finalized yet and you can expect some changes.
 

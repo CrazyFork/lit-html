@@ -55,12 +55,15 @@ export class TemplateInstance {
     }
   }
 
+  // 将所有的节点生成 DocumentFragment 返回, 然后会将对应的 parts 节点设置上.
+  // 后面就不用重复生成 DocumentFragment 了
   _clone(): DocumentFragment {
     // When using the Custom Elements polyfill, clone the node, rather than
     // importing it, to keep the fragment in the template's document. This
     // leaves the fragment inert so custom elements won't upgrade and
     // potentially modify their contents by creating a polyfilled ShadowRoot
     // while we traverse the tree.
+    // :todo, why created a deep clone here?
     const fragment = isCEPolyfill ?
         this.template.element.content.cloneNode(true) as DocumentFragment :
         document.importNode(this.template.element.content, true);

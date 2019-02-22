@@ -121,7 +121,7 @@ export class AttributePart implements Part {
     this.committer.commit();
   }
 }
-
+// nodePart 会在startNode到endNode之间做操作, 删减node节点
 export class NodePart implements Part {
   options: RenderOptions;
   startNode!: Node;
@@ -209,6 +209,7 @@ export class NodePart implements Part {
     }
   }
 
+  // 在 endNode 之前插入node 节点.
   private _insert(node: Node) {
     this.endNode.parentNode!.insertBefore(node, this.endNode);
   }
@@ -222,6 +223,7 @@ export class NodePart implements Part {
     this.value = value;
   }
 
+  // 在 startNode endNode 之间设置 textNode 的值
   private _commitText(value: string): void {
     const node = this.startNode.nextSibling!;
     value = value == null ? '' : value;
@@ -303,7 +305,7 @@ export class NodePart implements Part {
       this.clear(itemPart && itemPart!.endNode);
     }
   }
-
+  // remove 掉 startNode 到 this.endNode 间的所有节点
   clear(startNode: Node = this.startNode) {
     removeNodes(
         this.startNode.parentNode!, startNode.nextSibling!, this.endNode);
@@ -370,6 +372,7 @@ export class BooleanAttributePart implements Part {
  * a string first.
  */
 export class PropertyCommitter extends AttributeCommitter {
+  // 渲染 html node 的property
   single: boolean;
 
   constructor(element: Element, name: string, strings: string[]) {
@@ -392,6 +395,7 @@ export class PropertyCommitter extends AttributeCommitter {
   commit(): void {
     if (this.dirty) {
       this.dirty = false;
+      // assign node's property
       (this.element as any)[this.name] = this._getValue();
     }
   }
